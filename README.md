@@ -57,33 +57,30 @@ cmake --build build
 
 ## 3. Input / Đầu vào
 
-TODO_STUDENT: Mô tả rõ đầu vào của chương trình sau khi em hoàn thiện bài lab.
+Chương trình yêu cầu người dùng nhập từ stdin theo thứ tự:
+1. Chọn mode: `1`, `2`, `3` hoặc `4`
+2. Với mode 1: plaintext nhị phân (có thể dài hơn 64 bit)
+3. Với mode 1: key 64-bit nhị phân
+4. Với mode 2: ciphertext nhị phân
+5. Với mode 2: key 64-bit nhị phân
+6. Với mode 3/4: dữ liệu và ba khóa `K1`, `K2`, `K3` lần lượt, mỗi khóa dưới dạng chuỗi nhị phân 64 bit.
 
-Gợi ý nên nêu:
-- plaintext đang được nhập như thế nào
-- key đang được nhập như thế nào
-- chương trình nhận 1 block hay nhiều block
-- định dạng dữ liệu là chuỗi bit, chuỗi ký tự hay file
+Chương trình xử lý chuỗi bit, không dùng file input. Với mode mã hóa DES, plaintext có thể gồm nhiều block 64 bit.
 
 ## 4. Output / Đầu ra
 
-TODO_STUDENT: Mô tả rõ đầu ra của chương trình.
+- Với mode 1: in ra `Ciphertext: <chuỗi nhị phân>`.
+- Với mode 2: in ra `Decrypted: <chuỗi nhị phân>`.
+- Với mode 3: in ra `Ciphertext: <chuỗi nhị phân>` cho TripleDES EDE.
+- Với mode 4: in ra `Plaintext: <chuỗi nhị phân>` cho TripleDES DED.
 
-Gợi ý nên nêu:
-- ciphertext hiển thị ra sao
-- có in round keys hay không
-- có hỗ trợ giải mã hay không
-- với TripleDES thì đầu ra gồm những gì
+Chương trình cũng có thể in thêm prompt và round keys, nhưng kết quả cuối cùng là một chuỗi nhị phân dài hợp lệ.
 
 ## 5. Padding đang dùng
 
-TODO_STUDENT: Giải thích cơ chế padding em dùng.
+Chương trình dùng zero padding để mở rộng block cuối cùng lên độ dài 64 bit. Nếu plaintext không chia hết cho 64 bit, chương trình thêm các bit `0` vào phía cuối block cuối cùng.
 
-Gợi ý:
-- nếu plaintext dài hơn 64 bit thì chia block như thế nào
-- nếu thiếu bit thì pad bằng `0` ra sao
-- hạn chế của zero padding là gì
-- vì sao cách này chỉ phù hợp cho bài học nhập môn, không phải thiết kế an toàn hoàn chỉnh trong thực tế
+Hạn chế của zero padding là nếu plaintext gốc kết thúc bằng các bit `0`, thì khi giải mã không thể phân biệt giữa bit gốc và bit padding. Cách này chỉ phù hợp cho bài học nhập môn và không an toàn cho triển khai thực tế.
 
 ## 6. Tests bắt buộc
 
@@ -123,7 +120,7 @@ Trước khi nộp, cần có:
 - `tests/` với ít nhất 5 test
 - có negative test cho `tamper` và `wrong key`
 - `logs/` có ít nhất 1 file minh chứng thật
-- không còn dòng `TODO_STUDENT`
+- không còn dòng placeholder chưa hoàn chỉnh
 
 ## 10. Lưu ý về CI
 
@@ -132,7 +129,7 @@ CI sẽ **không chỉ kiểm tra file có tồn tại** mà còn kiểm tra:
 - các mục bắt buộc trong report
 - sự hiện diện của negative tests
 - có minh chứng trong `logs/`
-- repo **không còn placeholder `TODO_STUDENT`**
+- repo **không còn placeholder chưa hoàn chỉnh**
 
 Vì vậy repo starter này sẽ **chưa pass CI** cho tới khi sinh viên hoàn thiện nội dung.
 
